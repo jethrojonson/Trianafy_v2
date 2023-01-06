@@ -27,7 +27,9 @@ public class Album {
     @Column(name = "release_year")
     private int year;
 
-    @ManyToOne
+    @ManyToOne(
+            fetch = FetchType.EAGER
+    )
     private Artist artist;
 
     @Builder.Default
@@ -46,5 +48,10 @@ public class Album {
     public void addArtist(Artist a){
         artist=a;
         a.getAlbums().add(this);
+    }
+
+    public void removeArtist(Artist a){
+        artist=null;
+        a.getAlbums().remove(this);
     }
 }

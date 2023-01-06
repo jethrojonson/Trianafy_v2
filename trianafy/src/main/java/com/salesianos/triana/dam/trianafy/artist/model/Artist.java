@@ -38,10 +38,15 @@ public class Artist {
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @OneToMany(
-            mappedBy = "artist",
-            fetch = FetchType.EAGER
+            mappedBy = "artist"
     )
     private List<Album> albums = new ArrayList<>();
+
+    @PreRemove
+    public void setArtistToNull(){
+        songs.forEach(song -> song.getAuthors().remove(this));
+        albums.forEach(album -> album.setArtist(null));
+    }
 
 
 }
