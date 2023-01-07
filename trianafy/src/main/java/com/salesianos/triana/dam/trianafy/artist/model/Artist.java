@@ -29,7 +29,7 @@ public class Artist {
     @EqualsAndHashCode.Exclude
     @ManyToMany(
             mappedBy = "authors",
-            fetch = FetchType.EAGER
+            fetch = FetchType.LAZY
     )
     private List<Song> songs = new ArrayList<>();
 

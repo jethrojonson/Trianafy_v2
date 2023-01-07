@@ -35,8 +35,9 @@ public class AlbumService {
 
     public AlbumDTO edit(AlbumDTO a, Long id){
         Album result = repository.findById(id).get();
-        a.setId(id);
-        return AlbumDTO.of(repository.save(AlbumDTO.of(a)));
+        result.setTitle(a.getTitle());
+        result.setYear(a.getYear());
+        return AlbumDTO.of(repository.save(result));
     }
 
     public void remove(Long id){

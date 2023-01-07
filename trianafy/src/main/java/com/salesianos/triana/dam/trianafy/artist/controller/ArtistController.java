@@ -143,7 +143,6 @@ public class ArtistController {
                             )}
                     )
             ),
-            //SCHEMA RARUNO EN SWAGGER
             @ApiResponse(responseCode = "404",
                     description = "Artist not found",
                     content = @Content

@@ -41,7 +41,7 @@ public class Album {
     @EqualsAndHashCode.Exclude
     @OneToMany(
             mappedBy = "album",
-            fetch = FetchType.EAGER
+            fetch = FetchType.LAZY
     )
     private List<Song> tracklist = new ArrayList<>();
 

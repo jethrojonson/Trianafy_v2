@@ -38,7 +38,7 @@ public class Song {
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @ManyToMany(
-            fetch = FetchType.EAGER
+            fetch = FetchType.LAZY
     )
     @JoinTable(
             name = "made_by",
