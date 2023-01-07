@@ -8,6 +8,7 @@ import com.salesianos.triana.dam.trianafy.artist.model.Artist;
 import com.salesianos.triana.dam.trianafy.artist.view.ArtistViews;
 import com.salesianos.triana.dam.trianafy.song.dto.SongDTO;
 import com.salesianos.triana.dam.trianafy.song.model.Song;
+import com.salesianos.triana.dam.trianafy.song.view.SongViews;
 import lombok.*;
 
 import java.util.List;
@@ -19,13 +20,13 @@ import java.util.List;
 @Builder
 public class AlbumDTO {
 
-    @JsonView({ArtistViews.FullArtist.class})
+    @JsonView({SongViews.NewSong.class, SongViews.FullSong.class, ArtistViews.FullArtist.class})
     private Long id;
 
-    @JsonView({AlbumViews.NewAlbum.class, ArtistViews.FullArtist.class})
+    @JsonView({SongViews.SimpleSong.class, ArtistViews.FullArtist.class})
     private String title;
 
-    @JsonView({AlbumViews.NewAlbum.class, ArtistViews.FullArtist.class})
+    @JsonView({SongViews.FullSong.class, ArtistViews.FullArtist.class})
     private int year;
 
     private ArtistDTO artist;
@@ -41,6 +42,9 @@ public class AlbumDTO {
 
     public static Album of (AlbumDTO a){
         return Album.builder()
+                .id(a.getId())
+                .title(a.title)
+                .year(a.getYear())
                 .build();
     }
 

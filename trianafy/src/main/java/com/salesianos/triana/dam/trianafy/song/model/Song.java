@@ -28,6 +28,10 @@ public class Song {
     private LocalDate release;
 
     @ManyToOne
+    @JoinColumn(
+            name = "album_id",
+            foreignKey = @ForeignKey(name = "FK_SONG_ALBUM")
+    )
     private Album album;
 
     @Builder.Default
@@ -38,10 +42,22 @@ public class Song {
     )
     @JoinTable(
             name = "made_by",
-            joinColumns = @JoinColumn(name = "song_id"),
-            inverseJoinColumns = @JoinColumn(name = "artist_id")
+            joinColumns = @JoinColumn(
+                    name = "song_id",
+                    foreignKey = @ForeignKey(name = "FK_MADE_SONG")
+            ),
+            inverseJoinColumns = @JoinColumn(
+                    name = "artist_id",
+                    foreignKey = @ForeignKey(name = "FK_MADE_ARTIST")
+            )
     )
     private List<Artist> authors = new ArrayList<>();
+
+    @PreRemove
+    public void setSongToNull(){
+        authors.forEach(artist -> artist.getSongs().remove(this));
+        album.getTracklist().remove(this);
+    }
 
     //******************//
     //* HELPERS ARTIST *//

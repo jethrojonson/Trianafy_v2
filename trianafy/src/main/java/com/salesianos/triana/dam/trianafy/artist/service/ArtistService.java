@@ -23,7 +23,7 @@ public class ArtistService {
     public List<ArtistDTO> getAll(){
        List<Artist> result= repository.findAll();
        if(result.isEmpty())
-           throw new ArtistExceptions.EmptyListException();
+           throw new ArtistExceptions.EmptyArtistListException();
        return result.stream().map(ArtistDTO::of).toList();
     }
 

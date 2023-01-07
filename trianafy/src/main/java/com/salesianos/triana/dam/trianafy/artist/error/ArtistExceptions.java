@@ -15,9 +15,9 @@ public interface ArtistExceptions {
     }
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public class EmptyListException extends RuntimeException{
+    public class EmptyArtistListException extends RuntimeException{
 
-        public EmptyListException (){ super("Unable to find any artist");}
+        public EmptyArtistListException (){ super("Unable to find any artist");}
 
     }
 

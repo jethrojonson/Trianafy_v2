@@ -30,6 +30,10 @@ public class Album {
     @ManyToOne(
             fetch = FetchType.EAGER
     )
+    @JoinColumn(
+            name = "artist_id",
+            foreignKey = @ForeignKey(name = "FK_ALBUM_ARTIST")
+    )
     private Artist artist;
 
     @Builder.Default

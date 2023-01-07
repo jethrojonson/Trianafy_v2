@@ -22,8 +22,8 @@ public class ArtistControllerAdvice extends ResponseEntityExceptionHandler {
         );
     }
 
-    @ExceptionHandler(ArtistExceptions.EmptyListException.class)
-    public ResponseEntity<ArtistError> handleEmptyList(ArtistExceptions.EmptyListException ex){
+    @ExceptionHandler(ArtistExceptions.EmptyArtistListException.class)
+    public ResponseEntity<ArtistError> handleEmptyList(ArtistExceptions.EmptyArtistListException ex){
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
                 new ArtistError(HttpStatus.NOT_FOUND,ex.getMessage())
         );

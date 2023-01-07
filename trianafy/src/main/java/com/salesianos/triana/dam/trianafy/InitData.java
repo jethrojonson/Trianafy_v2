@@ -51,11 +51,18 @@ public class InitData {
                 .release(LocalDate.of(2014, 2, 14))
                 .build();
 
+        Song s2 = Song.builder()
+                .title("La más bella")
+                .release(LocalDate.of(2012, 4, 27))
+                .build();
+
         s1.addAlbum(al1);
         s1.addArtist(a1);
         s1.addArtist(a2);
+        s2.addArtist(a1);
+        s2.addAlbum(al1);
 
-        songRepository.saveAll(List.of(s1));
+        songRepository.saveAll(List.of(s1,s2));
 
         Playlist p1 = Playlist.builder()
                 .name("Música Garrapatera")
