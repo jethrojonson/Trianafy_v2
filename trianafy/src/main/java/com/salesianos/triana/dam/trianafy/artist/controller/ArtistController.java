@@ -114,7 +114,7 @@ public class ArtistController {
     @Operation(summary = "Bring an artist with details")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",
-                    description = "Artists found",
+                    description = "Artist found",
                     content = @Content(mediaType = "application/json",
                             array = @ArraySchema(schema = @Schema(implementation = ArtistDTO.class)),
                             examples = {@ExampleObject(

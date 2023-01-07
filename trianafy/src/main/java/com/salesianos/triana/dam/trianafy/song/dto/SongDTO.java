@@ -3,6 +3,7 @@ package com.salesianos.triana.dam.trianafy.song.dto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.salesianos.triana.dam.trianafy.album.dto.AlbumDTO;
+import com.salesianos.triana.dam.trianafy.album.view.AlbumViews;
 import com.salesianos.triana.dam.trianafy.artist.dto.ArtistDTO;
 import com.salesianos.triana.dam.trianafy.artist.model.Artist;
 import com.salesianos.triana.dam.trianafy.artist.view.ArtistViews;
@@ -21,10 +22,10 @@ import java.util.List;
 @Builder
 public class SongDTO {
 
-    @JsonView({SongViews.SimpleSong.class, ArtistViews.FullArtist.class})
+    @JsonView({SongViews.SimpleSong.class, ArtistViews.FullArtist.class, AlbumViews.FullAlbum.class})
     private Long id;
 
-    @JsonView({SongViews.NewSong.class, SongViews.SimpleSong.class, ArtistViews.FullArtist.class})
+    @JsonView({SongViews.NewSong.class, SongViews.SimpleSong.class, ArtistViews.FullArtist.class, AlbumViews.FullAlbum.class})
     private String title;
 
     @JsonView({SongViews.NewSong.class, SongViews.SimpleSong.class, ArtistViews.FullArtist.class})

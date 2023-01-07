@@ -35,7 +35,11 @@ public class InitData {
                 .name("El Kanka")
                 .build();
 
-        artistRepository.saveAll(List.of(a1, a2));
+        Artist a3 = Artist.builder()
+                .name("Estopa")
+                .build();
+
+        artistRepository.saveAll(List.of(a1, a2, a3));
 
         Album al1 = Album.builder()
                 .title("Cancioncicas hipotecadas")

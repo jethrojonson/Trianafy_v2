@@ -45,6 +45,12 @@ public class Album {
     )
     private List<Song> tracklist = new ArrayList<>();
 
+    @PreRemove
+    public void setAlbumToNull(){
+        tracklist.forEach(song->song.setAlbum(null));
+        artist.getAlbums().remove(this);
+    }
+
     //******************//
     //* HELPERS ARTIST *//
     //******************//
