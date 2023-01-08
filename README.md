@@ -3,10 +3,9 @@
 <p align="center">
   <img src="https://img.shields.io/badge/STATUS-DEVELOP-yellow" alt="Status del proyecto"/>
   <a href="https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html"><img src="https://img.shields.io/badge/jdk-v17.0.4.1-blue" alt="Versión java" /></a>
-  <a href="https://maven.apache.org/download.cgi"><img src="https://img.shields.io/badge/apache--maven-v3.8.6-blue" alt="Versión maven" /></a>
-  <a href="https://spring.io/projects/spring-boot"><img src="https://img.shields.io/badge/spring--boot-v2.7.7-blue" alt="Versión spring-boot" /></a>
-  <img src="https://img.shields.io/badge/release%20date-january-yellowgreen" alt="Lanzamiento del proyecto" />
-  <img src="https://img.shields.io/badge/license-MIT-brightgreen" alt="Licencia" />
+  <a href="https://maven.apache.org/download.cgi"><img src="https://img.shields.io/badge/apache--maven-v3.8.6-brown" alt="Versión maven" /></a>
+  <a href="https://spring.io/projects/spring-boot"><img src="https://img.shields.io/badge/spring--boot-v2.7.7-green" alt="Versión spring-boot" /></a>
+  <img src="https://img.shields.io/badge/release%20date-january-purple" alt="Lanzamiento del proyecto" />
 </p>
   
 
@@ -26,7 +25,7 @@ En resumen es un spotify al estilo trianero.
 ## Modelo de datos
 
 <p>
-    <img src="" alt="Modelo de datos - Trianafy_v2">
+    <img src="diagrama UML/modelo_datos.png" alt="Modelo de datos - Trianafy_v2">
 </p>
 
 ## Estructura del proyecto
