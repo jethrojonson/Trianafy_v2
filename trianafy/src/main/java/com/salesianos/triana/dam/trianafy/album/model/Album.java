@@ -27,7 +27,13 @@ public class Album {
     @Column(name = "release_year")
     private int year;
 
-    @ManyToOne
+    @ManyToOne(
+            fetch = FetchType.EAGER
+    )
+    @JoinColumn(
+            name = "artist_id",
+            foreignKey = @ForeignKey(name = "FK_ALBUM_ARTIST")
+    )
     private Artist artist;
 
     @Builder.Default
@@ -35,9 +41,15 @@ public class Album {
     @EqualsAndHashCode.Exclude
     @OneToMany(
             mappedBy = "album",
-            fetch = FetchType.EAGER
+            fetch = FetchType.LAZY
     )
     private List<Song> tracklist = new ArrayList<>();
+
+    @PreRemove
+    public void setAlbumToNull(){
+        tracklist.forEach(song->song.setAlbum(null));
+        artist.getAlbums().remove(this);
+    }
 
     //******************//
     //* HELPERS ARTIST *//
@@ -46,5 +58,10 @@ public class Album {
     public void addArtist(Artist a){
         artist=a;
         a.getAlbums().add(this);
+    }
+
+    public void removeArtist(Artist a){
+        artist=null;
+        a.getAlbums().remove(this);
     }
 }

@@ -27,11 +27,19 @@ public class Playlist {
     @Builder.Default
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @ManyToMany
+    @ManyToMany(
+            fetch = FetchType.EAGER
+    )
     @JoinTable(
-            name = "playlist_tracks",
-            joinColumns = @JoinColumn(name = "playlist_id"),
-            inverseJoinColumns = @JoinColumn(name = "song_id")
+            name = "listed",
+            joinColumns = @JoinColumn(
+                    name = "playlist_id",
+                    foreignKey = @ForeignKey(name = "FK_LISTED_PLAYLIST")
+            ),
+            inverseJoinColumns = @JoinColumn(
+                    name = "song_id",
+                    foreignKey = @ForeignKey(name = "FK_LISTED_SONG")
+            )
     )
     private List<Song> songs = new ArrayList<>();
 
