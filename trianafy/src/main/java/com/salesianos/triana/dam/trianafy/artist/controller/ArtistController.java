@@ -2,9 +2,6 @@ package com.salesianos.triana.dam.trianafy.artist.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.salesianos.triana.dam.trianafy.artist.dto.ArtistDTO;
-import com.salesianos.triana.dam.trianafy.artist.error.ArtistError;
-import com.salesianos.triana.dam.trianafy.artist.error.ArtistExceptions;
-import com.salesianos.triana.dam.trianafy.artist.model.Artist;
 import com.salesianos.triana.dam.trianafy.artist.service.ArtistService;
 import com.salesianos.triana.dam.trianafy.artist.view.ArtistViews;
 import io.swagger.v3.oas.annotations.Operation;
@@ -17,12 +14,9 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/artist")

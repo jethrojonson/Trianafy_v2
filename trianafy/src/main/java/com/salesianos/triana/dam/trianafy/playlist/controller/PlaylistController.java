@@ -1,12 +1,13 @@
 package com.salesianos.triana.dam.trianafy.playlist.controller;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.salesianos.triana.dam.trianafy.album.dto.AlbumDTO;
 import com.salesianos.triana.dam.trianafy.artist.dto.ArtistDTO;
 import com.salesianos.triana.dam.trianafy.playlist.dto.PlaylistDTO;
 import com.salesianos.triana.dam.trianafy.playlist.service.PlaylistService;
 import com.salesianos.triana.dam.trianafy.playlist.view.PlaylistViews;
+import com.salesianos.triana.dam.trianafy.song.dto.SongDTO;
+import com.salesianos.triana.dam.trianafy.song.view.SongViews;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -154,7 +155,7 @@ public class PlaylistController {
             )
     })
     @JsonView(PlaylistViews.FullPlaylist.class)
-    @GetMapping("/{id}")
+    @GetMapping({"/{id}", "/{id}/song"})
     @ResponseStatus(HttpStatus.OK)
     public PlaylistDTO getPlaylistById(@PathVariable Long id) {
         return service.getById(id);
@@ -223,5 +224,139 @@ public class PlaylistController {
     public void deletePlaylist(@PathVariable Long id) {
         service.remove(id);
     }
+
+    //FALTA \|/
+    @Operation(summary = "Add an existing song to a playlist")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Song added to playlist",
+                    content = @Content(mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = PlaylistDTO.class)),
+                            examples = {@ExampleObject(
+                                    value = """
+                                            {
+                                                  "id": 1,
+                                                  "name": "Playlist name",
+                                                  "description": "Playlist description",
+                                                  "songs": [
+                                                      {
+                                                          "id": 2,
+                                                          "title": "Song title",
+                                                          "release": "01/01/2000",
+                                                          "albumTitle": "Album title",
+                                                          "artists": "Artists names"
+                                                      },
+                                                      {
+                                                          "id": 3,
+                                                          "title": "Song title",
+                                                          "release": "01/01/2000",
+                                                          "albumTitle": "Album title",
+                                                          "artists": "Artists names"
+                                                      },
+                                                      {
+                                                          "id": 4,
+                                                          "title": "Song title",
+                                                          "release": "01/01/2000",
+                                                          "albumTitle": "Album title",
+                                                          "artists": "Artists names"
+                                                      }
+                                                  ]
+                                              }
+                                            """
+                            )}
+                    )
+            ),
+            @ApiResponse(responseCode = "404",
+                    description = "Playlist not found",
+                    content = @Content
+            ),
+            @ApiResponse(responseCode = "404",
+                    description = "Song not found",
+                    content = @Content
+            )
+
+    })
+    @JsonView(PlaylistViews.FullPlaylist.class)
+    @PostMapping("/{listId}/song/{songId}")
+    @ResponseStatus(HttpStatus.OK)
+    public PlaylistDTO addSongToPlaylist(@PathVariable Long listId, @PathVariable Long songId){
+        return service.addSongToPlaylist(listId, songId);
+    }
+
+
+    @Operation(summary = "Bring a song in a playlist with details")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Song found",
+                    content = @Content(mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = SongDTO.class)),
+                            examples = {@ExampleObject(
+                                    value = """
+                                            {
+                                                 "id": 1,
+                                                 "title": "Song title",
+                                                 "release": "01/01/2000",
+                                                 "album": {
+                                                     "id": 2,
+                                                     "title": "Album title",
+                                                     "year": 2000
+                                                 },
+                                                 "authors": [
+                                                     {
+                                                         "id": 3,
+                                                         "name": "Artist name"
+                                                     }
+                                                 ]
+                                             }
+                                            """
+                            )}
+                    )
+            ),
+            @ApiResponse(responseCode = "404",
+                    description = "Song not found",
+                    content = @Content
+            ),
+            @ApiResponse(responseCode = "404",
+                    description = "List not found",
+                    content = @Content
+            ),
+            @ApiResponse(responseCode = "404",
+                    description = "Song not in playlist",
+                    content = @Content
+            )
+    })
+    @JsonView(SongViews.FullSong.class)
+    @GetMapping("/{listId}/song/{songId}")
+    @ResponseStatus(HttpStatus.OK)
+    public SongDTO getSongInPlaylist(@PathVariable Long listId, @PathVariable Long songId){
+        return service.getSongInPlaylist(listId, songId);
+    }
+
+    @Operation(summary = "Delete a song from a playlist")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204",
+                    description = "No content",
+                    content = @Content
+            ),
+            @ApiResponse(responseCode = "404",
+                    description = "Song not found",
+                    content = @Content
+            ),
+            @ApiResponse(responseCode = "404",
+                    description = "List not found",
+                    content = @Content
+            ),
+            @ApiResponse(responseCode = "404",
+                    description = "Song not in playlist",
+                    content = @Content
+            )
+    })
+    @DeleteMapping("/{listId}/song/{songId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteSongFromPlaylist(@PathVariable Long listId, @PathVariable Long songId){
+        service.removeSongFromPlaylist(listId, songId);
+    }
+
+
 
 }

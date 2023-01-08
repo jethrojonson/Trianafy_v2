@@ -170,7 +170,6 @@ public class SongController {
                             )}
                     )
             ),
-            //SCHEMA RARUNO EN SWAGGER
             @ApiResponse(responseCode = "404",
                     description = "Song not found",
                     content = @Content

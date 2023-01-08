@@ -1,14 +1,13 @@
 package com.salesianos.triana.dam.trianafy.artist.service;
 
 import com.salesianos.triana.dam.trianafy.artist.dto.ArtistDTO;
-import com.salesianos.triana.dam.trianafy.artist.error.ArtistExceptions;
+import com.salesianos.triana.dam.trianafy.artist.exceptions.ArtistExceptions;
 import com.salesianos.triana.dam.trianafy.artist.model.Artist;
 import com.salesianos.triana.dam.trianafy.artist.repository.ArtistRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -17,6 +16,8 @@ public class ArtistService {
     private final ArtistRepository repository;
 
     public ArtistDTO add(ArtistDTO a){
+        if(a.getName()==null)
+            throw new ArtistExceptions.ArtistNameNullException();
         return ArtistDTO.of(repository.save(ArtistDTO.of(a)));
     }
 
@@ -33,6 +34,8 @@ public class ArtistService {
 
     public ArtistDTO edit(ArtistDTO a, Long id){
         Artist result = repository.findById(id).orElseThrow(()->new ArtistExceptions.ArtistNotFoundException(id));
+        if(a.getName()==null)
+            throw new ArtistExceptions.ArtistNameNullException();
         a.setId(id);
         return ArtistDTO.of(repository.save(ArtistDTO.of(a)));
     }
